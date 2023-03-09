@@ -1,0 +1,13 @@
+<div style="
+    height: 250px;
+    width: 100%;
+    background-color: cadetblue;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;"
+    [ngClass]="{ 'special': isSpecial }">
+    <span>{{title}}</span>
+    <span><button type="button" (click)="buttonclicked.emit('buttonclicked')">Press Me</button></span>
+</div>

@@ -1,0 +1,66 @@
+<div *ngIf="student" [ngStyle]="{backgroundColor: bgColor}" class="p-3">
+
+    <div class="d-flex justify-content-between aligns-items-center mb-2">
+        <h3 class="mb-0">Informazioni</h3>
+        <button type="button" mat-stroked-button (click)="editStudent.emit()">EDIT</button>
+    </div>
+
+    <p>Nome: <strong>{{student.nome}}</strong></p>
+    <p>Cognome: <strong>{{student.cognome}}</strong></p>
+    <p>Eta: <strong>{{student.eta}}</strong></p>
+    <hr />
+
+    <p> Genere:
+        <span *ngIf="student.genere === 'M'; else womanTemplate">
+            <i class="fa fa-mars" style="margin-right: 8px;"></i><strong>Uomo</strong>
+        </span>
+        <ng-template #womanTemplate>
+            <i class="fa fa-venus" style="margin-right: 8px;"></i><strong>Donna</strong>
+        </ng-template>
+    </p>
+    <hr />
+
+    <p>Citta: <strong>{{student.location.citta}}</strong></p>
+    <p>Cap: <strong>{{student.location.cap}}</strong></p>
+    <p>Indirizzo: <strong>{{student.location.indirizzo}}</strong></p>
+    <p>Provincia: <strong>{{student.location.provincia}}</strong></p>
+    <hr />
+
+    <h4 *ngIf="student.hobbies">Hobbies</h4>
+    <ul>
+        <li *ngFor="let hobby of student.hobbies">{{hobby.name}}
+            <i class="fa-solid fa-{{hobby.icon}}"></i>
+        </li>
+    </ul>
+    <hr />
+
+    <h4 *ngIf="student.lingue">Lingue</h4>
+    <ul>
+        <li *ngFor="let lang of student.lingue">{{lang.name}}
+            <i class="fa-solid fa-{{lang.icon}}" style="margin-right: 8px;"></i>
+        </li>
+    </ul>
+    <hr />
+
+    <h4 *ngIf="student.esperienze">Esperienze</h4>
+    <ul>
+        <li *ngFor="let exp of student.esperienze">Nome: {{exp.nome}}
+            <ul>
+                <li>Descrizione: <strong>{{exp.descrizione}}</strong></li>
+                <li>Inizio: <strong>{{exp.inizio | date: "yyyy/mm/dd"}}</strong></li>
+                <li>Fine: <strong>{{exp.fine | date: "dd/MM/yyyy"}}</strong></li>
+                <li>Tags: <strong>{{exp.tags}}</strong></li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+
+    <h4>Animali domestici
+        <span *ngIf="student.hasPets; else noPetsTemplate">
+            <i class="fa fa-check" style="color: greenyellow;"></i>
+        </span>
+        <ng-template #noPetsTemplate>
+            <i class="fa fa-xmark" style="color: red;"></i>
+        </ng-template>
+    </h4>
+</div>

@@ -1,0 +1,87 @@
+<div class="d-flex flex-column" *ngIf="studentViewModel">
+    <h4 *ngIf="mode==='edit'; else addStudentTemplate">MODIFICA STUDENTE</h4>
+    <ng-template #addStudentTemplate>AGGIUNGI STUDENTE</ng-template>
+
+    <div class="d-flex flex-column mb-3">
+        <input type="text" matInput [(ngModel)]="studentViewModel.nome" placeholder="Nome" />
+        <input type="text" matInput [(ngModel)]="studentViewModel.cognome" placeholder="Cognome" />
+    </div>
+    <hr />
+
+    <div class="row">
+        <div class="d-flex flex-column mb-3">
+            <p>Eta <input type="number" matInput [(ngModel)]="studentViewModel.eta" min="19" max="99" placeholder="Eta" /></p>
+        </div>
+        <hr />
+
+        <div>
+            <p>Genere</p>
+            <mat-select type="text" matInput [(ngModel)]="studentViewModel.genere" class="border border-dark">
+                <mat-option *ngFor="let gender of genderOptions" [value]="gender">{{gender}}</mat-option>
+            </mat-select>
+        </div>
+        <hr />
+
+        <div class="d-flex flex-column mb-3">
+            <p>Animali Domestici <mat-checkbox type="checkbox" [(ngModel)]="studentViewModel.hasPets"></mat-checkbox></p>
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <p>Location</p>
+            <div *ngIf="studentViewModel" class="d-flex flex-column">
+                <input type="text" mat-stroked-button [(ngModel)]="studentViewModel.location.citta" placeholder="Citta" />
+                <input type="text" mat-stroked-button [(ngModel)]="studentViewModel.location.indirizzo" placeholder="Indirizzo" />
+                <input type="number" mat-stroked-button [(ngModel)]="studentViewModel.location.cap" min="1" max="999" />
+                <input type="text" mat-stroked-button [(ngModel)]="studentViewModel.location.provincia" placeholder="Provincia" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <p>Hobbies</p>
+                <button type="button" max-stroked-button (click)="addHobby()" class="fa-solid fa-plus">hobby</button>
+            </div>
+        </div>
+        <div *ngFor="let hobby of studentViewModel.hobbies;" class="d-flex flex-column">
+            <input type="text" mat-stroked-button [(ngModel)]="hobby.name" placeholder="Nome" />
+            <input type="text" mat-stroked-button [(ngModel)]="hobby.icon" placeholder="Icona" />
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <p>Lingue</p>
+                <button type="button" max-stroked-button (click)="addLingua()" class="fa-solid fa-plus">lingua</button>
+            </div>
+        </div>
+        <div *ngFor="let lang of studentViewModel.lingue;" class="d-flex flex-column">
+            <input type="text" mat-stroked-button [(ngModel)]="lang.name" placeholder="Nome" />
+            <input type="text" mat-stroked-button [(ngModel)]="lang.icon" placeholder="Icona" />
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <p>Esperienze</p>
+                <button type="button" max-stroked-button (click)="addExp()" class="fa-solid fa-plus">exp</button>
+            </div>
+        </div>
+        <div *ngFor="let exp of studentViewModel.esperienze;" class="d-flex flex-column">
+            <input type="text" mat-stroked-button [(ngModel)]="exp.nome" placeholder="Nome" />
+            <input type="text" mat-stroked-button [(ngModel)]="exp.descrizione" placeholder="Descrizione" />
+            <input type="date" mat-stroked-button [(ngModel)]="exp.inizio" placeholder="Inizio" />
+            <input type="date" mat-stroked-button [(ngModel)]="exp.fine" placeholder="Fine" />
+            <!-- <button type="button" max-stroked-button (click)="addTag($event)" class="fa-solid fa-plus">tag</button> -->
+            <input type="text" mat-stroked-button [(ngModel)]="exp.tags" placeholder="Tags" />
+        </div>
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+        <button type="button" mat-stroked-button (click)="saveChanges()">SAVE</button>
+    </div>
+</div>
